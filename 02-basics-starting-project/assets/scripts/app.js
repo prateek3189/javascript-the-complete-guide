@@ -2,6 +2,32 @@ let defaultResult = 0;
 currentResult = defaultResult;
 const logs = [];
 
+function calculateResult(type) {
+  const enteredNumber = parseInt(userInput.value);
+  let mathOperator;
+  let operation = "";
+  if (type === "add") {
+    mathOperator = "+";
+    operation = "Addition";
+    currentResult += enteredNumber;
+  } else if (type === "sub") {
+    mathOperator = "-";
+    operation = "Subtraction";
+    currentResult -= enteredNumber;
+  } else if (type === "mul") {
+    mathOperator = "*";
+    operation = "Multiplication";
+    currentResult *= enteredNumber;
+  } else if (type === "div") {
+    mathOperator = "/";
+    operation = "Division";
+    currentResult /= enteredNumber;
+  }
+
+  displayDetails(mathOperator, currentResult, enteredNumber);
+  log(operation, enteredNumber);
+}
+
 function log(action, value) {
   const logString = action + " of: " + value;
   console.log(logString);
@@ -9,31 +35,19 @@ function log(action, value) {
 }
 
 function add() {
-  const enteredNumber = parseInt(userInput.value);
-  currentResult += enteredNumber;
-  displayDetails("+", currentResult, enteredNumber);
-  log("Addition", enteredNumber);
+  calculateResult("add");
 }
 
 function subtract() {
-  const enteredNumber = parseInt(userInput.value);
-  currentResult -= enteredNumber;
-  displayDetails("-", currentResult, enteredNumber);
-  log("Subtraction", enteredNumber);
+  calculateResult("sub");
 }
 
 function multiply() {
-  const enteredNumber = parseInt(userInput.value);
-  currentResult *= enteredNumber;
-  displayDetails("x", currentResult, enteredNumber);
-  log("Multiply", enteredNumber);
+  calculateResult("mul");
 }
 
 function divide() {
-  const enteredNumber = parseInt(userInput.value);
-  currentResult /= enteredNumber;
-  displayDetails("/", currentResult, enteredNumber);
-  log("Division", enteredNumber);
+  calculateResult("div ");
 }
 
 function displayDetails(operator, currentResult, enteredNumber) {
