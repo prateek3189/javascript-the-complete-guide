@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components Library</title>
+    <script src="./library.js" type="module"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      :root {
+        --color-primary: lightblue;
+      }
+
+      .highlight {
+        background-color: lightsalmon;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My PM Component Library</h1>
+    <section>
+      <h2>Modal</h2>
+      <pm-modal>
+        <h1 slot="modal-header">Please Confirm Payment</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
+          repudiandae nam dolorum totam animi nobis suscipit magnam voluptas
+          quasi fugit, mollitia necessitatibus nihil impedit doloribus? Est
+          animi exercitationem eos eaque.
+        </p>
+      </pm-modal>
+      <button id="open-modal">Open Modal</button>
+      <script>
+        const openButton = document.querySelector("#open-modal");
+        const modal = document.querySelector("pm-modal");
+
+        openButton.addEventListener("click", function () {
+          // modal.setAttribute("opened", true);
+          modal.open();
+
+          modal.addEventListener("confirm", function () {
+            console.log("Confirmed...");
+          });
+
+          modal.addEventListener("cancel", function () {
+            console.log("Cancelled...");
+          });
+        });
+      </script>
+    </section>
+    <hr />
+    <section>
+      <h2>Custom Anchor Tag</h2>
+      <p>
+        <a is="pm-confirm-link" href="https://www.google.com">Google</a>
+      </p>
+    </section>
+    <hr />
+
+    <section>
+      <h2>Tooltip</h2>
+      <p>
+        <pm-tooltip
+          class="important"
+          content="This is a tooltip text coming from outside"
+        >
+          <span class="highlight">Web components</span>
+        </pm-tooltip>
+        are awesome!!
+      </p>
+
+      <pm-tooltip content="This is a tooltip text coming from outside">
+        <span class="highlight">Web components</span>
+      </pm-tooltip>
+      are awesome!!
+    </section>
+  </body>
+</html>
